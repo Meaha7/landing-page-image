@@ -1,0 +1,106 @@
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700,800&display=swap");
+
+.gradient {
+  background: -webkit-linear-gradient(30deg, #fd6d68 0%, #f8a04e 80%);
+  background: linear-gradient(30deg, #fd6d68 0%, #f8a04e 80%);
+  opacity: 0.7;
+}
+
+.top-element {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 65px;
+  width: calc(50% - 50px);
+  border-bottom-right-radius: 100px;
+}
+
+section {
+  height: 100vh;
+  background: url("https://github.com/Meaha7/landing-page-image/blob/Meaha/home2_img_03_540x__1_-removebg-preview.png")
+/*     http://gatoledo.com/codepen-landingpage.png") */
+    right;
+  background-size: 86vh;
+  background-repeat: no-repeat;
+  background-position-x: 100%;
+}
+
+.orange {
+  color: #fc9651;
+}
+
+h1 {
+  font-family: "Raleway";
+  font-weight: 700;
+}
+p {
+  font-weight: 300;
+  margin-bottom: 30px;
+  padding: 0.6rem;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.btn-rounded {
+  border-radius: 50px;
+  width: 40%;
+  color: #fff;
+  font-size: 16px;
+}
+
+.btn-bordered {
+  border-radius: 50px;
+  border: 2px solid #fc9651;
+  width: 40%;
+  background: #fff;
+  color: #444;
+  font-size: 16px;
+}
+
+.card-concept {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  box-shadow: 0px 6px 12px rgba(252, 150, 81, 0.35);
+  padding: 1rem;
+  margin-bottom: 8px;
+}
+.card-concept span {
+  padding: 0.3rem 0.8rem;
+  margin-right: 10px;
+  border-radius: 8px;
+  float: left;
+  font-size: 28px;
+  color: #fff;
+}
+
+.dribbble {
+  position: fixed;
+  display: block;
+  right: 30px;
+  bottom: 17px;
+}
+.dribbble2 {
+  position: fixed;
+  display: block;
+  left: 20px;
+  bottom: 13px;
+}
+
+.dribbble img {
+  display: block;
+  width: 85px;
+}
+
+@media (min-width: 768px) {
+  .navbar-collapse.collapse {
+    background: transparent !important;
+    border-radius: 8px;
+  }
+}
+@media (max-width: 575px) {
+  section {
+    margin-top: 50px;
+    background-size: 70vh;
+    background-position-y: bottom;
+    background-position-x: 140px;
+  }
+}
