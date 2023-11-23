@@ -1,3 +1,3 @@
 # landing-page-image
 
-return jsonString.replaceAll("(?<!\\\\)n", "\\\\n");
+ jsonString = jsonString.replaceAll("\"(.*?)\"", m -> m.group(1).replace("\"", ""));
