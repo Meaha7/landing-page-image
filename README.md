@@ -2,3 +2,5 @@
 
 
 return jsonString.replaceAll("(?<!\\\\)n", "\\\\n");
+
+return jsonString.replaceAll("(?<!\\\\)n", "\\\\n");
