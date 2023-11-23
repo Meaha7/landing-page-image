@@ -6,3 +6,41 @@
 
 
 .replaceAll("(\"\\w+\"\\s*\\s*:\\s*\")([^\"]+)(\")", "$1$2$3");
+
+
+
+import org.json.JSONObject;
+
+public class JsonStringParser {
+
+    public static String processJsonString(String jsonString) {
+        // Parse the JSON string
+        JSONObject jsonObject = new JSONObject(jsonString);
+
+        // Process each key-value pair
+        for (String key : jsonObject.keySet()) {
+            // Get the original value
+            String originalValue = jsonObject.getString(key);
+
+            // Remove two double quotes from the value and keep single quotes
+            String modifiedValue = originalValue.replace("\"\"", "\"");
+
+            // Update the value in the JSON object
+            jsonObject.put(key, modifiedValue);
+        }
+
+        // Convert the modified JSON object back to a string
+        return jsonObject.toString();
+    }
+
+    public static void main(String[] args) {
+        // Example JSON string
+        String jsonString = "{ \"a\": \"b \\\"new\\\" \" }";
+
+        // Process the JSON string
+        String modifiedJsonString = processJsonString(jsonString);
+
+        // Print the modified JSON string
+        System.out.println(modifiedJsonString);
+    }
+}
