@@ -151,6 +151,8 @@ public class CSVProcessor {
 This Java code defines a CSVProcessor class with a processCSVMessage method that performs the required operations on the CSV message. The main method demonstrates how to use this method with an example CSV message.
 
 
+   List<String> resultList = new ArrayList<>(Arrays.asList((headerWithUUID + processedRows.toString()).split(System.lineSeparator())));
+
 
 
 
