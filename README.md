@@ -6,20 +6,10 @@ public class CSVProcessor {
 
     public static List<String> processCSVMessage(List<String> csvMessage) {
         // Extract the header without line separators
-        String originalHeader = csvMessage.get(0);
-        String header = originalHeader.replaceAll("\\r?\\n", "");
+        String header = csvMessage.get(0).replaceAll("\\r?\\n", "");
 
-        // Find the index of the first line separator in the header
-        int headerSeparatorIndex = originalHeader.indexOf(System.lineSeparator());
-
-        // Check if the header contains a line separator
-        if (headerSeparatorIndex != -1) {
-            // Replace the line separator with ",UUID" and another line separator
-            header = originalHeader.substring(0, headerSeparatorIndex) + ",UUID" + System.lineSeparator() + originalHeader.substring(headerSeparatorIndex + 1);
-        } else {
-            // If the header does not contain a line separator, simply append it with ",UUID" and a line separator
-            header = header + ",UUID" + System.lineSeparator();
-        }
+        // Add ",UUID" after the header and a line separator
+        String headerWithUUID = header + ",UUID" + System.lineSeparator();
 
         // Initialize an empty list to store processed rows
         List<String> processedRows = new ArrayList<>();
@@ -44,7 +34,7 @@ public class CSVProcessor {
 
         // Create a new list and add the header with UUID, and processed rows
         List<String> resultList = new ArrayList<>();
-        resultList.add(header);
+        resultList.add(headerWithUUID);
         resultList.addAll(processedRows);
 
         return resultList;
