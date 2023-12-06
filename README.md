@@ -26,8 +26,8 @@ public class CSVProcessor {
         for (int i = 1; i < csvMessage.size(); i++) {
             String row = csvMessage.get(i);
 
-            // Skip line separators
-            if (!row.equals(System.lineSeparator())) {
+            // Check if the row contains a line separator
+            if (row.contains(System.lineSeparator())) {
                 // Find the index of the first line separator in the row
                 int rowSeparatorIndex = row.indexOf(System.lineSeparator());
 
@@ -37,6 +37,9 @@ public class CSVProcessor {
                 // Add each modified row to the string
                 processedRows.append(modifiedRow).append(",").append(UUID.randomUUID().toString().substring(0, 8))
                         .append(System.lineSeparator());
+            } else {
+                // If the row does not contain a line separator, simply append it with ",UUID" and a line separator
+                processedRows.append(row).append(",UUID").append(System.lineSeparator());
             }
         }
 
