@@ -7,45 +7,42 @@ public class CSVProcessor {
     public static List<String> processCSVMessage(List<String> csvMessage) {
         // Extract the header without line separators
         String originalHeader = csvMessage.get(0);
-        String header = originalHeader.replaceAll("\\r?\\n", "");
+        String[] headerParts = originalHeader.split("\\r?\\n");
+        String header = String.join("", headerParts);
 
-        // Find the index of the first line separator in the header
-        int headerSeparatorIndex = originalHeader.indexOf(System.lineSeparator());
-
-        // Check if the header contains a line separator
-        if (headerSeparatorIndex != -1) {
-            // Replace the line separator with ",UUID" and another line separator
-            header = originalHeader.substring(0, headerSeparatorIndex) + ",UUID" + System.lineSeparator() + originalHeader.substring(headerSeparatorIndex + 1);
-        } else {
-            // If the header does not contain a line separator, simply append it with ",UUID" and a line separator
-            header = header + ",UUID" + System.lineSeparator();
-        }
+        // Add ",UUID" after the header and a line separator
+        String headerWithUUID = header + ",UUID" + System.lineSeparator();
 
         // Initialize an empty list to store processed rows
-        List<String> processedRows = new ArrayList<>();
+        List<String> resultList = new ArrayList<>();
+        resultList.add(headerWithUUID);
 
-        // Traverse from the 1st row till the end of csvMessage
+        // Traverse from the 2nd row till the end of csvMessage
         for (int i = 1; i < csvMessage.size(); i++) {
             String row = csvMessage.get(i);
 
-            // Find the index of the first line separator in the row
-            int rowSeparatorIndex = row.indexOf(System.lineSeparator());
+            // Split the row based on various line endings
+            String[] rowParts = row.split("\\r?\\n|\\n|\\r");
 
-            // Check if the row contains a line separator
-            if (rowSeparatorIndex != -1) {
-                // Add the first 8 characters of UUID after the index of the line separator
-                String modifiedRow = row.substring(0, rowSeparatorIndex) + UUID.randomUUID().toString().substring(0, 8) + row.substring(rowSeparatorIndex);
-                processedRows.add(modifiedRow);
-            } else {
-                // If the row does not contain a line separator, simply append it with ",UUID" and a line separator
-                processedRows.add(row + UUID.randomUUID().toString().substring(0, 8) + System.lineSeparator());
+            // Process each part of the row and concatenate into a StringBuilder
+            StringBuilder processedRow = new StringBuilder();
+            for (String part : rowParts) {
+                // Remove line separator characters from the part
+                String processedPart = part.replaceAll("\\r?\\n|\\n|\\r", "");
+
+                // Add a comma followed by the first 8 characters of UUID
+                processedPart = processedPart + "," + UUID.randomUUID().toString().substring(0, 8);
+
+                // Append it with a line separator
+                processedPart = processedPart + System.lineSeparator();
+
+                // Append the processed part to the StringBuilder
+                processedRow.append(processedPart);
             }
-        }
 
-        // Create a new list and add the header with UUID, and processed rows
-        List<String> resultList = new ArrayList<>();
-        resultList.add(header);
-        resultList.addAll(processedRows);
+            // Add the processed row to the result list
+            resultList.add(processedRow.toString());
+        }
 
         return resultList;
     }
